@@ -37,16 +37,7 @@
     align-items:center;
     justify-content:center;
   }
-  .logo{
-    display:flex;align-items:center;gap:10px;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size:26px;
-    color:#fff;
-    letter-spacing:.5px;
-    text-shadow:0 0 18px rgba(255,255,255,.25);
-  }
-  .logo svg{display:block;}
+  .brand-logo{display:block;height:42px;width:auto;}
 
   /* ===== HERO ===== */
   .eyebrow-row{text-align:center;padding:34px 20px 22px;}
@@ -79,8 +70,8 @@
     color:var(--ink);
   }
 
-  .chevrons{margin:26px auto 6px;width:34px;}
-  .chevrons svg{display:block;width:100%;}
+  .chevrons{margin:14px auto -6px;width:64px;}
+  .chevrons svg, .chevrons img{display:block;width:100%;height:auto;}
 
   /* ===== MULTI-STEP QUIZ FORM ===== */
   .quiz{
@@ -249,8 +240,7 @@
 
   /* ===== MOBILE ===== */
   @media (max-width:600px){
-    .logo{font-size:19px;gap:7px;}
-    .logo svg{width:24px;height:21px;}
+    .brand-logo{height:30px;}
     .eyebrow-row{padding:26px 16px 18px;}
     .eyebrow-row span{font-size:17px;}
     .wrap{padding:0 14px;}
@@ -278,22 +268,7 @@
 <body>
 
   <header>
-    <div class="logo">
-      QUALITY
-      <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#EFDFAF"/>
-            <stop offset="1" stop-color="#A9782B"/>
-          </linearGradient>
-        </defs>
-        <rect x="2" y="10" width="6" height="18" fill="url(#g1)"/>
-        <rect x="10" y="2" width="6" height="26" fill="url(#g1)"/>
-        <rect x="18" y="14" width="6" height="14" fill="url(#g1)"/>
-        <rect x="26" y="7" width="6" height="21" fill="url(#g1)"/>
-      </svg>
-      JOBS
-    </div>
+    <img class="brand-logo" src="https://assets.cdn.filesafe.space/mMtrTqbMqNOoKetdQowt/media/6948dad88dda72671d288663.png" alt="Quality Jobs">
   </header>
 
   <div class="eyebrow-row"><span>For Builders, Renovators &amp; Chippies:</span></div>
@@ -304,16 +279,7 @@
       <p class="sub">Our average client adds $100'000 per month <span class="sub-break"><br></span>in high margins jobs. See if you qualify:</p>
 
       <div class="chevrons">
-        <svg viewBox="0 0 34 34" fill="none">
-          <path d="M4 4L17 14L30 4" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 14L17 24L30 14" stroke="url(#g2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <defs>
-            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#B4842B"/>
-              <stop offset="1" stop-color="#EFDFAF"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <img src="https://assets.cdn.filesafe.space/mMtrTqbMqNOoKetdQowt/media/6738504be3d9713d8d5f27d4.gif" alt="" width="500" height="500">
       </div>
 
       <div class="quiz" id="quiz">
