@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality Jobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F7FF;
+    --bar:#2C2C2C;
+    --gold-1:#EFDFAF;
+    --gold-2:#B4842B;
+    --ink:#000000;
+    --muted:#4B4B4B;
+    --line:#E3E6EE;
+    --blue:#1C5CF0;
+    --green:#3DA35D;
+    --radius-lg:14px;
+    --radius-sm:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Outfit',Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  .wrap{max-width:740px;margin:0 auto;padding:0 20px;}
+  .wrap-wide{max-width:900px;margin:0 auto;padding:0 20px;}
+
+  /* ===== HEADER ===== */
+  header{
+    background:var(--bar);
+    padding:16px 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:26px;
+    color:#fff;
+    letter-spacing:.5px;
+    text-shadow:0 0 18px rgba(255,255,255,.25);
+  }
+  .logo svg{display:block;}
+
+  /* ===== HERO ===== */
+  .eyebrow-row{text-align:center;padding:34px 20px 22px;}
+  .eyebrow-row span{
+    font-family:'Outfit';
+    font-size:21px;
+    font-weight:500;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+
+  .hero-card{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 18px 40px -22px rgba(20,20,40,.25);
+    padding:46px 30px 40px;
+    text-align:center;
+  }
+  .hero-card h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:900;
+    font-size:32px;
+    line-height:1.22;
+    letter-spacing:.2px;
+  }
+  .hero-card .sub{
+    margin-top:18px;
+    font-size:20px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+
+  .chevrons{margin:26px auto 6px;width:34px;}
+  .chevrons svg{display:block;width:100%;}
+
+  /* ===== FORM ===== */
+  form{
+    max-width:460px;
+    margin:26px auto 0;
+    text-align:left;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:26px 24px 24px;
+  }
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .field .input-wrap{position:relative;}
+  .field input{
+    width:100%;
+    border:1.5px solid #D7DAE3;
+    border-radius:var(--radius-sm);
+    padding:10px 12px;
+    font-size:15px;
+    font-family:'Outfit',Arial,sans-serif;
+    outline:none;
+    background:#fff;
+  }
+  .field input::placeholder{color:#9AA0AE;}
+  .field input:focus{border-color:var(--blue);}
+  .field.has-icon input{padding-left:34px;}
+  .field .icon{
+    position:absolute;left:10px;top:50%;transform:translateY(-50%);
+    color:#9AA0AE;font-size:14px;pointer-events:none;
+  }
+  button.submit{
+    background:var(--bar);
+    color:#fff;
+    border:none;
+    font-family:'Outfit';
+    font-weight:600;
+    font-size:15px;
+    padding:11px 26px;
+    border-radius:var(--radius-sm);
+    cursor:pointer;
+  }
+  button.submit:hover{background:#1c1c1c;}
+  .form-status{
+    margin-top:14px;
+    font-size:13.5px;
+    color:var(--green);
+    display:none;
+  }
+  .form-status.show{display:block;}
+
+  /* ===== LOGO STRIP ===== */
+  .logo-strip{padding:54px 20px 10px;}
+  .logo-strip .row{
+    display:flex;flex-wrap:wrap;gap:36px;
+    align-items:center;justify-content:center;
+    filter:grayscale(1);
+    opacity:.55;
+  }
+  .logo-strip .pill{
+    font-family:'Poppins';font-weight:700;font-size:14px;color:#444;
+    display:flex;align-items:center;gap:6px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testi-head{text-align:center;padding:40px 20px 24px;font-size:18px;font-weight:600;}
+  .testi-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    max-width:900px;margin:0 auto;padding:0 20px;
+  }
+  @media (max-width:760px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{
+    position:relative;
+    aspect-ratio:9/13;
+    border-radius:14px;
+    overflow:hidden;
+    background:linear-gradient(160deg,#3a3f4b,#15171c);
+    display:flex;align-items:flex-end;
+  }
+  .testi-card .badge{
+    position:absolute;top:10px;left:10px;
+    background:rgba(0,0,0,.5);color:#fff;font-size:11px;font-weight:600;
+    padding:4px 9px;border-radius:999px;
+  }
+  .testi-card .menu{
+    position:absolute;top:10px;right:10px;color:#fff;font-size:16px;opacity:.8;
+  }
+  .testi-card .caption{
+    padding:18px 16px 44px;
+    color:#fff;
+    font-size:17px;
+    font-weight:700;
+    line-height:1.3;
+    text-shadow:0 2px 8px rgba(0,0,0,.5);
+  }
+  .testi-card .play{
+    position:absolute;bottom:14px;right:14px;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.9);
+    display:flex;align-items:center;justify-content:center;
+    color:#111;font-size:13px;
+  }
+
+  .cta-mid{text-align:center;padding:36px 20px 54px;}
+  .cta-blue{
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    font-family:'Outfit';font-weight:600;font-size:15.5px;
+    padding:14px 30px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .cta-blue:hover{background:#154bc9;}
+
+  /* ===== CALENDAR ===== */
+  .cal-section{padding:0 20px 60px;}
+  .cal-card{
+    max-width:900px;margin:0 auto;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    display:grid;
+    grid-template-columns:280px 1fr;
+    overflow:hidden;
+  }
+  @media (max-width:760px){.cal-card{grid-template-columns:1fr;}}
+  .cal-left{padding:28px 26px;border-right:1px solid var(--line);}
+  .cal-avatar{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--bar);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .cal-avatar svg{width:34px;height:34px;}
+  .cal-left .host{font-size:13.5px;color:var(--muted);margin-bottom:4px;}
+  .cal-left h3{font-size:19px;font-weight:700;margin-bottom:12px;}
+  .cal-meta{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:6px;}
+  .cal-left p{font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.6;}
+  .cal-left ul{margin:8px 0 0 18px;font-size:13.5px;color:var(--muted);line-height:1.8;}
+
+  .cal-right{padding:26px 28px;}
+  .cal-right h4{font-size:16px;font-weight:700;margin-bottom:16px;}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .cal-nav .month{font-weight:600;font-size:14.5px;}
+  .cal-nav button{background:none;border:none;color:var(--green);cursor:pointer;font-size:16px;}
+  .cal-grid-wrap{display:flex;gap:20px;}
+  table.cal-grid{border-collapse:collapse;font-size:13px;flex:1;width:100%;}
+  table.cal-grid th{color:#8A8F9C;font-weight:600;padding:6px 8px;font-size:12px;}
+  table.cal-grid td{padding:5px;text-align:center;}
+  .day{
+    width:30px;height:30px;line-height:30px;border-radius:50%;
+    display:inline-block;color:#B7BBC6;
+  }
+  .day.active{color:#111;}
+  .day.today{background:var(--green);color:#fff;}
+  .day.avail{background:#E9F5EC;color:var(--green);font-weight:600;}
+  .slots{display:flex;flex-direction:column;gap:8px;width:110px;flex-shrink:0;max-height:230px;overflow:hidden;}
+  .slot{
+    border:1.5px solid var(--green);color:var(--green);
+    border-radius:8px;text-align:center;padding:8px 4px;font-size:12.5px;font-weight:600;
+  }
+  .tz-row{margin-top:18px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .tz-row select{border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-family:inherit;font-size:13px;background:#fff;}
+
+  /* ===== FOOTER ===== */
+  footer{padding:36px 20px 28px;}
+  .footer-row{
+    max-width:900px;margin:0 auto;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;
+  }
+  footer .company{font-weight:700;font-size:15px;}
+  footer .abn{font-size:13.5px;color:var(--muted);margin-top:2px;}
+  footer .contact-label{font-weight:700;font-size:14px;}
+  footer .email{font-size:13.5px;color:var(--muted);margin-top:2px;}
+  footer .email b{color:var(--ink);}
+  .footer-line{max-width:900px;margin:20px auto 14px;border:none;border-top:1px solid var(--line);}
+  .footer-legal{
+    max-width:900px;margin:0 auto;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:12.5px;color:var(--muted);
+  }
+  .footer-legal a{color:var(--muted);text-decoration:none;margin-left:14px;}
+
+  /* ===== MOBILE ===== */
+  @media (max-width:600px){
+    .logo{font-size:19px;gap:7px;}
+    .logo svg{width:24px;height:21px;}
+    .eyebrow-row{padding:26px 16px 18px;}
+    .eyebrow-row span{font-size:17px;}
+    .wrap{padding:0 14px;}
+    .hero-card{padding:30px 18px 28px;border-radius:16px;}
+    .hero-card h1{font-size:23px;line-height:1.28;}
+    .hero-card .sub{font-size:16px;margin-top:14px;}
+    .hero-card .sub .sub-break{display:none;}
+    form{padding:20px 16px 18px;margin-top:20px;}
+    .logo-strip{padding:38px 16px 6px;}
+    .logo-strip .row{gap:22px 26px;}
+    .logo-strip .pill{font-size:12.5px;}
+    .testi-head{font-size:16px;padding:32px 16px 18px;}
+    .testi-grid{padding:0 14px;gap:12px;}
+    .testi-card{aspect-ratio:16/13;}
+    .cta-mid{padding:28px 16px 40px;}
+    .cta-blue{width:100%;padding:14px 20px;}
+    .cal-section{padding:0 14px 40px;}
+    .cal-left{padding:22px 18px;}
+    .cal-right{padding:20px 18px;}
+    .cal-grid-wrap{flex-direction:column;gap:16px;}
+    table.cal-grid{font-size:12px;}
+    .day{width:26px;height:26px;line-height:26px;}
+    .slots{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}
+    .slot{flex:1 0 30%;}
+    .footer-row{padding:0 2px;}
+    .footer-legal{padding:0 2px;}
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      QUALITY
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#EFDFAF"/>
+            <stop offset="1" stop-color="#A9782B"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="10" width="6" height="18" fill="url(#g1)"/>
+        <rect x="10" y="2" width="6" height="26" fill="url(#g1)"/>
+        <rect x="18" y="14" width="6" height="14" fill="url(#g1)"/>
+        <rect x="26" y="7" width="6" height="21" fill="url(#g1)"/>
+      </svg>
+      JOBS
+    </div>
+  </header>
+
+  <div class="eyebrow-row"><span>For Builders, Renovators &amp; Chippies:</span></div>
+
+  <div class="wrap">
+    <div class="hero-card">
+      <h1>GET 4-8+ NEW JOBS PER MONTH<br>WITHOUT PAYING FOR SH*T LEADS</h1>
+      <p class="sub">Our average client adds $100'000 per month <span class="sub-break"><br></span>in high margins jobs. See if you qualify:</p>
+
+      <div class="chevrons">
+        <svg viewBox="0 0 34 34" fill="none">
+          <path d="M4 4L17 14L30 4" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 14L17 24L30 14" stroke="url(#g2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#B4842B"/>
+              <stop offset="1" stop-color="#EFDFAF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <form id="leadForm">
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <div class="input-wrap"><input type="text" id="fullName" name="fullName" placeholder="Full Name"></div>
+        </div>
+        <div class="field has-icon">
+          <label for="email">Email *</label>
+          <div class="input-wrap">
+            <span class="icon">✉</span>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="phone">Phone *</label>
+          <div class="input-wrap"><input type="tel" id="phone" name="phone" placeholder="Phone" required></div>
+        </div>
+        <button type="submit" class="submit">Submit</button>
+        <div class="form-status" id="formStatus">Thanks — we'll be in touch shortly.</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="logo-strip">
+    <div class="row">
+      <div class="pill">L2</div>
+      <div class="pill">Simply Shutters and Shades</div>
+      <div class="pill">SilkTouch Joinery</div>
+      <div class="pill">⌂ Homebuild Co</div>
+      <div class="pill">Binary Construction</div>
+      <div class="pill">Budget Reno</div>
+    </div>
+  </div>
+
+  <div class="testi-head">Have a look what our clients have to say:</div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <span class="badge">🔊 Tap for sound</span>
+      <span class="menu">⋯</span>
+      <div class="caption">I run a bathroom renovation…</div>
+      <div class="play">▶</div>
+    </div>
+    <div class="testi-card">
+      <span class="badge">🔊 Tap for sound</span>
+      <span class="menu">⋯</span>
+      <div class="caption">jump on here and give a massive…</div>
+      <div class="play">▶</div>
+    </div>
+    <div class="testi-card">
+      <span class="badge">🔊 Tap for sound</span>
+      <span class="menu">⋯</span>
+      <div class="caption">helping us…</div>
+      <div class="play">▶</div>
+    </div>
+  </div>
+
+  <div class="cta-mid">
+    <button class="cta-blue">Check if your area is available</button>
+  </div>
+
+  <div class="cal-section">
+    <div class="cal-card">
+      <div class="cal-left">
+        <div class="cal-avatar">
+          <svg viewBox="0 0 34 30" fill="none">
+            <rect x="2" y="10" width="6" height="18" fill="url(#g1)"/>
+            <rect x="10" y="2" width="6" height="26" fill="url(#g1)"/>
+            <rect x="18" y="14" width="6" height="14" fill="url(#g1)"/>
+            <rect x="26" y="7" width="6" height="21" fill="url(#g1)"/>
+          </svg>
+        </div>
+        <div class="host">1-1 w/ Alfie</div>
+        <h3>15-Min Growth Call 📞 (Phone Call)</h3>
+        <div class="cal-meta">🕐 15 min</div>
+        <div class="cal-meta">📅 Tue, Jul 14, 2026</div>
+        <p>In this quick call, you'll speak directly with Alfie, the <b>founder</b> of <b>Quality Jobs</b>.</p>
+        <p>The goal is simple, to assess where your business stands and whether or not we can help you grow.</p>
+        <p>On this call, we'll go over:</p>
+        <ul>
+          <li>A quick overview of your business</li>
+          <li>The goals you're trying to achieve</li>
+          <li>Whether we're a good fit to help</li>
+        </ul>
+      </div>
+      <div class="cal-right">
+        <h4>Select Date &amp; Time</h4>
+        <div class="cal-nav">
+          <button>‹</button>
+          <span class="month">July 2026</span>
+          <button>›</button>
+        </div>
+        <div class="cal-grid-wrap">
+          <table class="cal-grid">
+            <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+            <tr><td></td><td></td><td></td><td><span class="day">1</span></td><td><span class="day">2</span></td><td><span class="day">3</span></td><td><span class="day">4</span></td></tr>
+            <tr><td><span class="day">5</span></td><td><span class="day">6</span></td><td><span class="day">7</span></td><td><span class="day">8</span></td><td><span class="day">9</span></td><td><span class="day">10</span></td><td><span class="day">11</span></td></tr>
+            <tr><td><span class="day">12</span></td><td><span class="day">13</span></td><td><span class="day today">14</span></td><td><span class="day avail">15</span></td><td><span class="day avail">16</span></td><td><span class="day">17</span></td><td><span class="day">18</span></td></tr>
+            <tr><td><span class="day">19</span></td><td><span class="day">20</span></td><td><span class="day">21</span></td><td><span class="day">22</span></td><td><span class="day">23</span></td><td><span class="day">24</span></td><td><span class="day">25</span></td></tr>
+            <tr><td><span class="day">26</span></td><td><span class="day">27</span></td><td><span class="day">28</span></td><td><span class="day">29</span></td><td><span class="day">30</span></td><td><span class="day">31</span></td><td></td></tr>
+          </table>
+          <div class="slots">
+            <div class="slot">02:15 PM</div>
+            <div class="slot">03:00 PM</div>
+            <div class="slot">03:15 PM</div>
+            <div class="slot">05:15 PM</div>
+            <div class="slot">05:30 PM</div>
+          </div>
+        </div>
+        <div class="tz-row">
+          🌐
+          <select><option>GMT+10:00 Australia/Melbourne (GMT+10)</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="company">Quality Jobs</div>
+        <div class="abn">ABN: 91463305751</div>
+      </div>
+      <div>
+        <div class="contact-label">Contact us</div>
+        <div class="email">Email: <b>alfie@qualityjobs.com.au</b></div>
+      </div>
+    </div>
+    <hr class="footer-line">
+    <div class="footer-legal">
+      <span>© 2026 Quality Jobs. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('leadForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('formStatus').classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
