@@ -82,59 +82,73 @@
   .chevrons{margin:26px auto 6px;width:34px;}
   .chevrons svg{display:block;width:100%;}
 
-  /* ===== FORM ===== */
-  form{
+  /* ===== MULTI-STEP QUIZ FORM ===== */
+  .quiz{
     max-width:460px;
     margin:26px auto 0;
     text-align:left;
     border:1px solid var(--line);
     border-radius:12px;
-    padding:26px 24px 24px;
+    padding:24px 22px 22px;
   }
-  .field{margin-bottom:16px;}
-  .field label{
-    display:block;
-    font-size:14px;
-    font-weight:600;
-    margin-bottom:6px;
+  .quiz-progress-track{height:6px;background:#EDEFF5;border-radius:999px;overflow:hidden;margin-bottom:10px;}
+  .quiz-progress-fill{height:100%;width:20%;background:var(--bar);border-radius:999px;transition:width .3s ease;}
+  .quiz-progress-label{font-size:12px;color:var(--muted);margin-bottom:18px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+
+  .quiz-step{display:none;}
+  .quiz-step.active{display:block;animation:qStepIn .25s ease;}
+  @keyframes qStepIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .quiz-question{font-size:19px;font-weight:700;margin-bottom:16px;line-height:1.35;}
+
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-option{
+    display:flex;align-items:center;gap:12px;
+    border:1.5px solid #D7DAE3;background:#F7F8FB;
+    border-radius:8px;padding:12px 14px;cursor:pointer;
+    font-size:15px;font-weight:500;
+    transition:border-color .15s,background .15s;
   }
-  .field .input-wrap{position:relative;}
-  .field input{
+  .quiz-option:hover{border-color:#B9C0D2;}
+  .quiz-option.selected{border-color:var(--bar);background:#fff;box-shadow:0 0 0 1.5px var(--bar) inset;}
+  .quiz-option .num{
+    flex:none;width:26px;height:26px;border:1.5px solid #B9C0D2;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#555;
+  }
+  .quiz-option.selected .num{border-color:var(--bar);color:var(--bar);}
+
+  .quiz-field{margin-bottom:20px;}
+  .quiz-field input{
     width:100%;
     border:1.5px solid #D7DAE3;
     border-radius:var(--radius-sm);
-    padding:10px 12px;
-    font-size:15px;
+    padding:11px 12px;
+    font-size:16px;
     font-family:'Outfit',Arial,sans-serif;
     outline:none;
     background:#fff;
   }
-  .field input::placeholder{color:#9AA0AE;}
-  .field input:focus{border-color:var(--blue);}
-  .field.has-icon input{padding-left:34px;}
-  .field .icon{
-    position:absolute;left:10px;top:50%;transform:translateY(-50%);
-    color:#9AA0AE;font-size:14px;pointer-events:none;
+  .quiz-field input::placeholder{color:#9AA0AE;}
+  .quiz-field input:focus{border-color:var(--blue);}
+
+  .quiz-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .quiz-back{background:none;border:none;color:var(--muted);font-size:13.5px;cursor:pointer;padding:8px 4px;}
+  .quiz-next{
+    background:var(--bar);color:#fff;border:none;
+    font-family:'Outfit';font-weight:600;font-size:15px;
+    padding:11px 28px;border-radius:var(--radius-sm);cursor:pointer;
+    margin-left:auto;
   }
-  button.submit{
-    background:var(--bar);
-    color:#fff;
-    border:none;
-    font-family:'Outfit';
-    font-weight:600;
-    font-size:15px;
-    padding:11px 26px;
-    border-radius:var(--radius-sm);
-    cursor:pointer;
-  }
-  button.submit:hover{background:#1c1c1c;}
-  .form-status{
-    margin-top:14px;
-    font-size:13.5px;
-    color:var(--green);
-    display:none;
-  }
-  .form-status.show{display:block;}
+  .quiz-next:hover{background:#1c1c1c;}
+  .quiz-next:disabled{opacity:.35;cursor:not-allowed;}
+
+  .quiz-done{display:none;text-align:center;padding:10px 0 4px;}
+  .quiz-done.show{display:block;}
+  .quiz-done .tick{font-size:34px;margin-bottom:8px;}
+  .quiz-done h4{font-size:18px;margin-bottom:6px;}
+  .quiz-done p{font-size:14px;color:var(--muted);}
+  .quiz-error{font-size:12.5px;color:#C0392B;margin-top:-10px;margin-bottom:14px;display:none;}
+  .quiz-error.show{display:block;}
 
   /* ===== LOGO STRIP ===== */
   .logo-strip{padding:54px 20px 10px;}
@@ -200,55 +214,19 @@
   }
   .cta-blue:hover{background:#154bc9;}
 
-  /* ===== CALENDAR ===== */
+  /* ===== CALENDAR (real GHL/LeadConnector embed) ===== */
   .cal-section{padding:0 20px 60px;}
-  .cal-card{
+  .cal-heading{max-width:900px;margin:0 auto 18px;text-align:center;}
+  .cal-heading h3{font-size:22px;font-weight:700;}
+  .cal-heading p{font-size:14.5px;color:var(--muted);margin-top:6px;}
+  .cal-embed-card{
     max-width:900px;margin:0 auto;
     background:#fff;
     border:1px solid var(--line);
     border-radius:16px;
-    display:grid;
-    grid-template-columns:280px 1fr;
     overflow:hidden;
   }
-  @media (max-width:760px){.cal-card{grid-template-columns:1fr;}}
-  .cal-left{padding:28px 26px;border-right:1px solid var(--line);}
-  .cal-avatar{
-    width:64px;height:64px;border-radius:50%;
-    background:var(--bar);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:14px;
-  }
-  .cal-avatar svg{width:34px;height:34px;}
-  .cal-left .host{font-size:13.5px;color:var(--muted);margin-bottom:4px;}
-  .cal-left h3{font-size:19px;font-weight:700;margin-bottom:12px;}
-  .cal-meta{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:6px;}
-  .cal-left p{font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.6;}
-  .cal-left ul{margin:8px 0 0 18px;font-size:13.5px;color:var(--muted);line-height:1.8;}
-
-  .cal-right{padding:26px 28px;}
-  .cal-right h4{font-size:16px;font-weight:700;margin-bottom:16px;}
-  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-  .cal-nav .month{font-weight:600;font-size:14.5px;}
-  .cal-nav button{background:none;border:none;color:var(--green);cursor:pointer;font-size:16px;}
-  .cal-grid-wrap{display:flex;gap:20px;}
-  table.cal-grid{border-collapse:collapse;font-size:13px;flex:1;width:100%;}
-  table.cal-grid th{color:#8A8F9C;font-weight:600;padding:6px 8px;font-size:12px;}
-  table.cal-grid td{padding:5px;text-align:center;}
-  .day{
-    width:30px;height:30px;line-height:30px;border-radius:50%;
-    display:inline-block;color:#B7BBC6;
-  }
-  .day.active{color:#111;}
-  .day.today{background:var(--green);color:#fff;}
-  .day.avail{background:#E9F5EC;color:var(--green);font-weight:600;}
-  .slots{display:flex;flex-direction:column;gap:8px;width:110px;flex-shrink:0;max-height:230px;overflow:hidden;}
-  .slot{
-    border:1.5px solid var(--green);color:var(--green);
-    border-radius:8px;text-align:center;padding:8px 4px;font-size:12.5px;font-weight:600;
-  }
-  .tz-row{margin-top:18px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
-  .tz-row select{border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-family:inherit;font-size:13px;background:#fff;}
+  .cal-embed-card iframe{display:block;width:100%;border:none;}
 
   /* ===== FOOTER ===== */
   footer{padding:36px 20px 28px;}
@@ -280,7 +258,8 @@
     .hero-card h1{font-size:23px;line-height:1.28;}
     .hero-card .sub{font-size:16px;margin-top:14px;}
     .hero-card .sub .sub-break{display:none;}
-    form{padding:20px 16px 18px;margin-top:20px;}
+    .quiz{padding:20px 16px 18px;margin-top:20px;}
+    .quiz-question{font-size:17px;}
     .logo-strip{padding:38px 16px 6px;}
     .logo-strip .row{gap:22px 26px;}
     .logo-strip .pill{font-size:12.5px;}
@@ -290,13 +269,7 @@
     .cta-mid{padding:28px 16px 40px;}
     .cta-blue{width:100%;padding:14px 20px;}
     .cal-section{padding:0 14px 40px;}
-    .cal-left{padding:22px 18px;}
-    .cal-right{padding:20px 18px;}
-    .cal-grid-wrap{flex-direction:column;gap:16px;}
-    table.cal-grid{font-size:12px;}
-    .day{width:26px;height:26px;line-height:26px;}
-    .slots{width:100%;flex-direction:row;flex-wrap:wrap;max-height:none;}
-    .slot{flex:1 0 30%;}
+    .cal-heading h3{font-size:19px;}
     .footer-row{padding:0 2px;}
     .footer-legal{padding:0 2px;}
   }
@@ -343,25 +316,86 @@
         </svg>
       </div>
 
-      <form id="leadForm">
-        <div class="field">
-          <label for="fullName">Full Name</label>
-          <div class="input-wrap"><input type="text" id="fullName" name="fullName" placeholder="Full Name"></div>
-        </div>
-        <div class="field has-icon">
-          <label for="email">Email *</label>
-          <div class="input-wrap">
-            <span class="icon">✉</span>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+      <div class="quiz" id="quiz">
+        <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+        <div class="quiz-progress-label" id="quizProgressLabel">Step 1 of 5</div>
+
+        <!-- Step 1: jobs per month -->
+        <div class="quiz-step active" data-step="0">
+          <div class="quiz-question">How many jobs can you take on per month?</div>
+          <div class="quiz-options" data-field="jobsPerMonth">
+            <div class="quiz-option" data-value="2"><span class="num">1</span><span>2</span></div>
+            <div class="quiz-option" data-value="4"><span class="num">2</span><span>4</span></div>
+            <div class="quiz-option" data-value="6"><span class="num">3</span><span>6</span></div>
+            <div class="quiz-option" data-value="8"><span class="num">4</span><span>8</span></div>
+          </div>
+          <div class="quiz-nav">
+            <span></span>
+            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
           </div>
         </div>
-        <div class="field">
-          <label for="phone">Phone *</label>
-          <div class="input-wrap"><input type="tel" id="phone" name="phone" placeholder="Phone" required></div>
+
+        <!-- Step 2: state -->
+        <div class="quiz-step" data-step="1">
+          <div class="quiz-question">What state are you in?</div>
+          <div class="quiz-options" data-field="state">
+            <div class="quiz-option" data-value="NSW"><span class="num">1</span><span>NSW</span></div>
+            <div class="quiz-option" data-value="VIC"><span class="num">2</span><span>VIC</span></div>
+            <div class="quiz-option" data-value="QLD"><span class="num">3</span><span>QLD</span></div>
+            <div class="quiz-option" data-value="SA"><span class="num">4</span><span>SA</span></div>
+            <div class="quiz-option" data-value="WA"><span class="num">5</span><span>WA</span></div>
+            <div class="quiz-option" data-value="ACT"><span class="num">6</span><span>ACT</span></div>
+            <div class="quiz-option" data-value="TAS"><span class="num">7</span><span>TAS</span></div>
+          </div>
+          <div class="quiz-nav">
+            <button type="button" class="quiz-back" data-back>‹ Back</button>
+            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
+          </div>
         </div>
-        <button type="submit" class="submit">Submit</button>
-        <div class="form-status" id="formStatus">Thanks — we'll be in touch shortly.</div>
-      </form>
+
+        <!-- Step 3: name -->
+        <div class="quiz-step" data-step="2">
+          <div class="quiz-question">What's your name?</div>
+          <div class="quiz-field">
+            <input type="text" id="qFullName" placeholder="Full Name" autocomplete="name">
+          </div>
+          <div class="quiz-nav">
+            <button type="button" class="quiz-back" data-back>‹ Back</button>
+            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
+          </div>
+        </div>
+
+        <!-- Step 4: phone -->
+        <div class="quiz-step" data-step="3">
+          <div class="quiz-question">What's your phone number?</div>
+          <div class="quiz-field">
+            <input type="tel" id="qPhone" placeholder="Phone" autocomplete="tel">
+          </div>
+          <div class="quiz-nav">
+            <button type="button" class="quiz-back" data-back>‹ Back</button>
+            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
+          </div>
+        </div>
+
+        <!-- Step 5: email -->
+        <div class="quiz-step" data-step="4">
+          <div class="quiz-question">What's your email?</div>
+          <div class="quiz-field">
+            <input type="email" id="qEmail" placeholder="Email" autocomplete="email">
+          </div>
+          <div class="quiz-error" id="quizError">Enter a valid email address.</div>
+          <div class="quiz-nav">
+            <button type="button" class="quiz-back" data-back>‹ Back</button>
+            <button type="button" class="quiz-next" id="quizSubmit">Submit ✓</button>
+          </div>
+        </div>
+
+        <div class="quiz-done" id="quizDone">
+          <div class="tick">✅</div>
+          <h4>You're in!</h4>
+          <p>Thanks — check below to lock in a time for your free growth call.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -403,60 +437,19 @@
   </div>
 
   <div class="cal-section">
-    <div class="cal-card">
-      <div class="cal-left">
-        <div class="cal-avatar">
-          <svg viewBox="0 0 34 30" fill="none">
-            <rect x="2" y="10" width="6" height="18" fill="url(#g1)"/>
-            <rect x="10" y="2" width="6" height="26" fill="url(#g1)"/>
-            <rect x="18" y="14" width="6" height="14" fill="url(#g1)"/>
-            <rect x="26" y="7" width="6" height="21" fill="url(#g1)"/>
-          </svg>
-        </div>
-        <div class="host">1-1 w/ Alfie</div>
-        <h3>15-Min Growth Call 📞 (Phone Call)</h3>
-        <div class="cal-meta">🕐 15 min</div>
-        <div class="cal-meta">📅 Tue, Jul 14, 2026</div>
-        <p>In this quick call, you'll speak directly with Alfie, the <b>founder</b> of <b>Quality Jobs</b>.</p>
-        <p>The goal is simple, to assess where your business stands and whether or not we can help you grow.</p>
-        <p>On this call, we'll go over:</p>
-        <ul>
-          <li>A quick overview of your business</li>
-          <li>The goals you're trying to achieve</li>
-          <li>Whether we're a good fit to help</li>
-        </ul>
-      </div>
-      <div class="cal-right">
-        <h4>Select Date &amp; Time</h4>
-        <div class="cal-nav">
-          <button>‹</button>
-          <span class="month">July 2026</span>
-          <button>›</button>
-        </div>
-        <div class="cal-grid-wrap">
-          <table class="cal-grid">
-            <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
-            <tr><td></td><td></td><td></td><td><span class="day">1</span></td><td><span class="day">2</span></td><td><span class="day">3</span></td><td><span class="day">4</span></td></tr>
-            <tr><td><span class="day">5</span></td><td><span class="day">6</span></td><td><span class="day">7</span></td><td><span class="day">8</span></td><td><span class="day">9</span></td><td><span class="day">10</span></td><td><span class="day">11</span></td></tr>
-            <tr><td><span class="day">12</span></td><td><span class="day">13</span></td><td><span class="day today">14</span></td><td><span class="day avail">15</span></td><td><span class="day avail">16</span></td><td><span class="day">17</span></td><td><span class="day">18</span></td></tr>
-            <tr><td><span class="day">19</span></td><td><span class="day">20</span></td><td><span class="day">21</span></td><td><span class="day">22</span></td><td><span class="day">23</span></td><td><span class="day">24</span></td><td><span class="day">25</span></td></tr>
-            <tr><td><span class="day">26</span></td><td><span class="day">27</span></td><td><span class="day">28</span></td><td><span class="day">29</span></td><td><span class="day">30</span></td><td><span class="day">31</span></td><td></td></tr>
-          </table>
-          <div class="slots">
-            <div class="slot">02:15 PM</div>
-            <div class="slot">03:00 PM</div>
-            <div class="slot">03:15 PM</div>
-            <div class="slot">05:15 PM</div>
-            <div class="slot">05:30 PM</div>
-          </div>
-        </div>
-        <div class="tz-row">
-          🌐
-          <select><option>GMT+10:00 Australia/Melbourne (GMT+10)</option></select>
-        </div>
-      </div>
+    <div class="cal-heading">
+      <h3>Book your free 15-min growth call</h3>
+      <p>Pick a time that works — you'll speak directly with Alfie, founder of Quality Jobs.</p>
+    </div>
+    <div class="cal-embed-card">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/booking/9RYbpD9vjUFtkBLhJ7Ql"
+        style="min-height:820px;"
+        scrolling="no"
+        id="9RYbpD9vjUFtkBLhJ7Ql_1"></iframe>
     </div>
   </div>
+  <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
   <footer>
     <div class="footer-row">
@@ -477,10 +470,107 @@
   </footer>
 
   <script>
-    document.getElementById('leadForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      document.getElementById('formStatus').classList.add('show');
+    // Paste your GoHighLevel "Inbound Webhook" URL here (Workflow → Trigger → Inbound Webhook).
+    // GHL will make jobsPerMonth / state / fullName / phone / email available as custom values.
+    const WEBHOOK_URL = "PASTE_YOUR_GHL_WEBHOOK_URL_HERE";
+
+    const quiz = document.getElementById('quiz');
+    const steps = Array.from(quiz.querySelectorAll('.quiz-step'));
+    const progressFill = document.getElementById('quizProgressFill');
+    const progressLabel = document.getElementById('quizProgressLabel');
+    const quizDone = document.getElementById('quizDone');
+    const answers = {};
+    let current = 0;
+
+    function showStep(i){
+      steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
+      progressFill.style.width = ((i + 1) / steps.length * 100) + '%';
+      progressLabel.textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
+      current = i;
+    }
+
+    // Choice-based steps (jobs per month, state)
+    steps.forEach((step) => {
+      const optsWrap = step.querySelector('.quiz-options');
+      if (!optsWrap) return;
+      const field = optsWrap.dataset.field;
+      const nextBtn = step.querySelector('[data-next]');
+      optsWrap.querySelectorAll('.quiz-option').forEach((opt) => {
+        opt.addEventListener('click', () => {
+          optsWrap.querySelectorAll('.quiz-option').forEach((o) => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          answers[field] = opt.dataset.value;
+          nextBtn.disabled = false;
+        });
+      });
     });
+
+    // Text-input steps (name, phone, email)
+    function wireTextStep(inputId, field, validate) {
+      const input = document.getElementById(inputId);
+      const step = input.closest('.quiz-step');
+      const nextBtn = step.querySelector('[data-next], #quizSubmit');
+      input.addEventListener('input', () => {
+        const val = input.value.trim();
+        answers[field] = val;
+        nextBtn.disabled = validate ? !validate(val) : val.length === 0;
+      });
+    }
+    wireTextStep('qFullName', 'fullName');
+    wireTextStep('qPhone', 'phone', (v) => v.replace(/[^0-9]/g, '').length >= 8);
+    wireTextStep('qEmail', 'email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+
+    // Next / Back
+    quiz.querySelectorAll('[data-next]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        if (current < steps.length - 1) showStep(current + 1);
+      });
+    });
+    quiz.querySelectorAll('[data-back]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (current > 0) showStep(current - 1);
+      });
+    });
+
+    // Final submit → webhook
+    document.getElementById('quizSubmit').addEventListener('click', async () => {
+      const errorEl = document.getElementById('quizError');
+      const email = answers.email || '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.classList.add('show');
+        return;
+      }
+      errorEl.classList.remove('show');
+
+      const payload = {
+        jobsPerMonth: answers.jobsPerMonth || '',
+        state: answers.state || '',
+        fullName: answers.fullName || '',
+        phone: answers.phone || '',
+        email: answers.email || '',
+        source: 'qualityjobs.com.au/a'
+      };
+
+      quiz.querySelector('.quiz-step.active').style.display = 'none';
+      quizDone.classList.add('show');
+
+      if (WEBHOOK_URL && WEBHOOK_URL.startsWith('http')) {
+        try {
+          await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.error('Webhook send failed', err);
+        }
+      } else {
+        console.warn('No WEBHOOK_URL set — form data was not sent anywhere:', payload);
+      }
+    });
+
+    showStep(0);
   </script>
 
 </body>
