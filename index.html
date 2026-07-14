@@ -141,17 +141,22 @@
   .quiz-error{font-size:12.5px;color:#C0392B;margin-top:-10px;margin-bottom:14px;display:none;}
   .quiz-error.show{display:block;}
 
-  /* ===== LOGO STRIP ===== */
-  .logo-strip{padding:54px 20px 10px;}
-  .logo-strip .row{
-    display:flex;flex-wrap:wrap;gap:36px;
-    align-items:center;justify-content:center;
-    filter:grayscale(1);
-    opacity:.55;
+  /* ===== LOGO STRIP (auto-scrolling marquee) ===== */
+  .logo-banner-section{width:100%;overflow:hidden;background:transparent;padding:44px 0 10px;}
+  .logo-slider{position:relative;width:100%;height:120px;overflow:hidden;}
+  .logo-slider::before,
+  .logo-slider::after{
+    content:"";position:absolute;top:0;width:80px;height:100%;z-index:2;pointer-events:none;
   }
-  .logo-strip .pill{
-    font-family:'Poppins';font-weight:700;font-size:14px;color:#444;
-    display:flex;align-items:center;gap:6px;
+  .logo-slider::before{left:0;background:linear-gradient(to right, var(--bg) 0%, rgba(244,247,255,0) 100%);}
+  .logo-slider::after{right:0;background:linear-gradient(to left, var(--bg) 0%, rgba(244,247,255,0) 100%);}
+  .logo-slide-track{display:flex;width:fit-content;animation:logoScroll 30s linear infinite;}
+  .logo-slide{flex:0 0 auto;width:170px;height:120px;display:flex;align-items:center;justify-content:center;}
+  .logo-slide img{max-width:80%;max-height:70px;filter:grayscale(100%);opacity:.6;transition:.3s;}
+  .logo-slide img:hover{filter:grayscale(0%);opacity:1;}
+  @keyframes logoScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){
+    .logo-slide-track{animation:none;}
   }
 
   /* ===== TESTIMONIALS ===== */
@@ -250,9 +255,10 @@
     .hero-card .sub .sub-break{display:none;}
     .quiz{padding:20px 16px 18px;margin-top:20px;}
     .quiz-question{font-size:17px;}
-    .logo-strip{padding:38px 16px 6px;}
-    .logo-strip .row{gap:22px 26px;}
-    .logo-strip .pill{font-size:12.5px;}
+    .logo-banner-section{padding:32px 0 6px;}
+    .logo-slider{height:90px;}
+    .logo-slide{width:120px;height:90px;}
+    .logo-slide img{max-height:50px;}
     .testi-head{font-size:16px;padding:32px 16px 18px;}
     .testi-grid{padding:0 14px;gap:12px;}
     .testi-card{aspect-ratio:16/13;}
@@ -360,16 +366,27 @@
     </div>
   </div>
 
-  <div class="logo-strip">
-    <div class="row">
-      <div class="pill">L2</div>
-      <div class="pill">Simply Shutters and Shades</div>
-      <div class="pill">SilkTouch Joinery</div>
-      <div class="pill">⌂ Homebuild Co</div>
-      <div class="pill">Binary Construction</div>
-      <div class="pill">Budget Reno</div>
+  <section class="logo-banner-section">
+    <div class="logo-slider">
+      <div class="logo-slide-track">
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/a18952a4687825defef32b6880fe2addcba910cd/logo_white-scaled%20copy%202.png" alt="Logo 1"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/cropped-Binary-Construction_Tranparent-269x90.png" alt="Logo 2"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/31368d87-286f-4b45-90c2-56e0362d60c1.jpeg" alt="Logo 3"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/Transparent%5C.png" alt="Logo 4"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/yellow.png" alt="Logo 5"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/simply-shutters-white.png" alt="Logo 6"></div>
+        <div class="logo-slide"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/logo-2048x364%20(1).webp" alt="Logo 7"></div>
+
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/a18952a4687825defef32b6880fe2addcba910cd/logo_white-scaled%20copy%202.png" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/cropped-Binary-Construction_Tranparent-269x90.png" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/31368d87-286f-4b45-90c2-56e0362d60c1.jpeg" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/Transparent%5C.png" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/yellow.png" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/simply-shutters-white.png" alt=""></div>
+        <div class="logo-slide" aria-hidden="true"><img src="https://raw.githubusercontent.com/alfbutt/logostorage/refs/heads/main/logo-2048x364%20(1).webp" alt=""></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <div class="testi-head">Have a look what our clients have to say:</div>
   <div class="testi-grid">
