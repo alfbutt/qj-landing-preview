@@ -329,10 +329,6 @@
             <div class="quiz-option" data-value="6"><span class="num">3</span><span>6</span></div>
             <div class="quiz-option" data-value="8"><span class="num">4</span><span>8</span></div>
           </div>
-          <div class="quiz-nav">
-            <span></span>
-            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
-          </div>
         </div>
 
         <!-- Step 2: state -->
@@ -349,7 +345,6 @@
           </div>
           <div class="quiz-nav">
             <button type="button" class="quiz-back" data-back>‹ Back</button>
-            <button type="button" class="quiz-next" data-next disabled>OK ✓</button>
           </div>
         </div>
 
@@ -489,18 +484,20 @@
       current = i;
     }
 
-    // Choice-based steps (jobs per month, state)
+    // Choice-based steps (jobs per month, state) — selecting an option auto-advances, no OK click needed
     steps.forEach((step) => {
       const optsWrap = step.querySelector('.quiz-options');
       if (!optsWrap) return;
       const field = optsWrap.dataset.field;
-      const nextBtn = step.querySelector('[data-next]');
+      const stepIndex = Number(step.dataset.step);
       optsWrap.querySelectorAll('.quiz-option').forEach((opt) => {
         opt.addEventListener('click', () => {
           optsWrap.querySelectorAll('.quiz-option').forEach((o) => o.classList.remove('selected'));
           opt.classList.add('selected');
           answers[field] = opt.dataset.value;
-          nextBtn.disabled = false;
+          setTimeout(() => {
+            if (stepIndex === current && current < steps.length - 1) showStep(current + 1);
+          }, 220);
         });
       });
     });
